@@ -2,7 +2,6 @@
  * ANANYA PANDEY PORTFOLIO INTERACTIVE SCRIPT
  * Features:
  * - Tabbed Section View & Page Controller (Squarespace Inspired)
- * - Live AI Agent Terminal Loop Simulator (Perceive -> Think -> Plan -> Execute)
  * - Dynamic Case Study Modal Renderer
  * - Full Interactive Resume Modal Viewer
  * - Contact Form Handler with simulated notification
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================
        1. TABBED SECTION VIEW CONTROLLER
        ========================================== */
-    const tabButtons = document.querySelectorAll('.page-tab-btn, .hero-pill-tab, [data-tab]');
+    const tabButtons = document.querySelectorAll('.page-tab-btn, [data-tab]');
     const pageSections = document.querySelectorAll('.page-section');
 
     function activateTab(tabTarget) {
@@ -64,64 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ==========================================
-       2. HERO SECTION: LIVE AI TERMINAL SIMULATION
-       ========================================== */
-    const terminalOutput = document.getElementById('heroTerminalOutput');
-    const loopSteps = document.querySelectorAll('.agent-loop-diagram .loop-step');
-
-    const terminalLogs = [
-        { text: '// System initialized. Voice engine listening...', class: 'comment', step: 0 },
-        { text: '$ user_voice: "Open VS Code and initialize EVA repository"', class: '', step: 0 },
-        { text: '✓ Speech-To-Text (Whisper): Transcribed with 99.4% accuracy', class: 'success', step: 0 },
-        { text: '⚡ Vision Engine: Capturing active desktop screen buffer (1920x1080)', class: 'info', step: 1 },
-        { text: '🧠 Gemini 1.5 Computer Use API: Planning 3-step action sequence', class: 'accent', step: 1 },
-        { text: '➔ Step 1: Locate VS Code icon at [X: 420, Y: 850]', class: '', step: 2 },
-        { text: '➔ Step 2: Trigger double-click mouse action via robotjs', class: '', step: 2 },
-        { text: '➔ Step 3: Open terminal and type `git status`', class: '', step: 2 },
-        { text: '🛡️ Safety Prompt: Action requires terminal execution permission. Allowed.', class: 'info', step: 3 },
-        { text: '✓ Action Executed successfully in 120ms via tRPC RPC channel.', class: 'success', step: 3 }
-    ];
-
-    let logIndex = 0;
-
-    function renderNextLog() {
-        if (!terminalOutput) return;
-
-        // Reset if we reached end
-        if (logIndex >= terminalLogs.length) {
-            logIndex = 0;
-            terminalOutput.innerHTML = `
-                <div class="terminal-line comment">// AI Agent Runtime Initialized</div>
-                <div class="terminal-line"><span class="prompt">$</span> eva --task "Analyze screen & execute automation"</div>
-            `;
-        }
-
-        const log = terminalLogs[logIndex];
-        
-        // Highlight active step in agent loop diagram
-        loopSteps.forEach((stepEl, idx) => {
-            if (idx === log.step) {
-                stepEl.classList.add('active');
-            } else {
-                stepEl.classList.remove('active');
-            }
-        });
-
-        // Append log line
-        const line = document.createElement('div');
-        line.className = `terminal-line ${log.class}`;
-        line.innerHTML = log.text;
-        terminalOutput.appendChild(line);
-        terminalOutput.scrollTop = terminalOutput.scrollHeight;
-
-        logIndex++;
-    }
-
-    // Run terminal simulation every 2.5 seconds
-    setInterval(renderNextLog, 2500);
-
-    /* ==========================================
-       3. MODAL CONTROLS (RESUME & CASE STUDY)
+       2. MODAL CONTROLS (RESUME & CASE STUDY)
        ========================================== */
     const resumeModal = document.getElementById('resumeModal');
     const openResumeBtn = document.getElementById('openResumeBtn');
@@ -168,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const caseStudiesData = {
         eva01: {
-            title: "EVA-01 — AI Desktop Agent",
+            title: "EVA-01: Desktop Agent",
             subtitle: "COMPUTER-USE AI AGENT • VOICE AI • ELECTRON • tRPC",
             year: "2026",
             problem: "Traditional desktop automation tools require fragile, pre-scripted coordinate macros that fail whenever UI elements change. Users need an autonomous assistant that can visually comprehend desktop applications, accept natural voice commands, and execute complex multi-step tasks across multi-monitor setups.",
@@ -282,36 +224,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
 
                     <div class="cs-section">
-                        <h3><i class="fa-solid fa-triangle-exclamation"></i> 01 — The Problem</h3>
+                        <h3><i class="fa-solid fa-triangle-exclamation"></i> 01: The problem</h3>
                         <p>${data.problem}</p>
                     </div>
 
                     <div class="cs-section">
-                        <h3><i class="fa-solid fa-lightbulb"></i> 02 — The Solution</h3>
+                        <h3><i class="fa-solid fa-lightbulb"></i> 02: The solution</h3>
                         <p>${data.solution}</p>
                     </div>
 
                     <div class="cs-section">
-                        <h3><i class="fa-solid fa-sitemap"></i> 03 — System Architecture</h3>
+                        <h3><i class="fa-solid fa-sitemap"></i> 03: System architecture</h3>
                         <div class="cs-diagram-box">${data.architecture}</div>
                     </div>
 
                     <div class="cs-section">
-                        <h3><i class="fa-solid fa-list-check"></i> 04 — Key Features & Capabilities</h3>
+                        <h3><i class="fa-solid fa-list-check"></i> 04: Key features</h3>
                         <ul class="cs-list">
                             ${data.features.map(f => `<li><i class="fa-solid fa-check"></i> ${f}</li>`).join('')}
                         </ul>
                     </div>
 
                     <div class="cs-section">
-                        <h3><i class="fa-solid fa-gears"></i> 05 — Tech Stack Used</h3>
+                        <h3><i class="fa-solid fa-gears"></i> 05: Tech stack</h3>
                         <div class="project-tech-stack" style="margin-top: 10px;">
                             ${data.tech.map(t => `<span>${t}</span>`).join('')}
                         </div>
                     </div>
 
                     <div class="cs-section">
-                        <h3><i class="fa-solid fa-trophy"></i> 06 — Impact & Results</h3>
+                        <h3><i class="fa-solid fa-trophy"></i> 06: Results</h3>
                         <p>${data.results}</p>
                     </div>
 
